@@ -46,13 +46,24 @@ class ServiceProvider extends IlluminateServiceProvider
      *
      * @return void
      */
-    protected function loadConfigsFrom($path)
+    protected function loadConfigsFrom($path, $module)
     {
         if (! $this->app->configurationIsCached()) {
             $files = $this->getConfigurationFiles($path);
 
             foreach ($files as $key => $path) {
-                config()->set($key, require $path);
+                if($key == 'database'){
+                    $database = config('database');
+                    $module_databse = require $path;
+
+                    $database['connections'] = array_merge(
+                        $database['connections'],
+                        $module_databse['connections']
+                    );
+                    config()->set('database', $database);
+                }else{
+                    config()->set($key, require $path);
+                }
             }
         }
     }
