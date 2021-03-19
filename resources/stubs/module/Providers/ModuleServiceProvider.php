@@ -17,7 +17,7 @@ class DummyProvider extends ServiceProvider
         $this->loadViewsFrom(module_path('DummySlug', 'ResourcesViewsMapping', 'DummyLocation'), 'DummySlug');
         $this->loadMigrationsFrom(module_path('DummySlug', 'DatabaseMigrationsMapping', 'DummyLocation'));
         if(!$this->app->configurationIsCached()) {
-            $this->loadConfigsFrom(module_path('DummySlug', 'ConfigMapping', 'DummyLocation'));
+            $this->loadConfigsFrom(module_path('DummySlug', 'ConfigMapping', 'DummyLocation'), 'DummySlug');
         }
         $this->loadFactoriesFrom(module_path('DummySlug', 'DatabaseFactoriesMapping', 'DummyLocation'));
     }
